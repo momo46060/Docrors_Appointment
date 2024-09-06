@@ -10,7 +10,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
       json['message'] as String,
       Data.fromJson(json['data'] as Map<String, dynamic>),
-      json['status'] as String,
+      json['status'] as bool,
       (json['code'] as num).toInt(),
     );
 
