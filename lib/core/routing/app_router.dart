@@ -1,5 +1,6 @@
 import 'package:docrors/core/di/di.dart';
 import 'package:docrors/core/routing/routes.dart';
+import 'package:docrors/features/home/logic/cubit/home_cubit.dart';
 import 'package:docrors/features/home/ui/home_Screen.dart';
 import 'package:docrors/features/login/logic/cubit/login_cubit.dart';
 import 'package:docrors/features/login/ui/login_screen.dart';
@@ -29,15 +30,13 @@ class AppRouter {
           ),
         );
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
-      default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text("No Route Defind for ${settings.name}"),
-            ),
-          ),
-        );
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<HomeCubit>()..emitHomeState(),
+                  child: HomeScreen(),
+                ));
+      default:
+        return null;
     }
   }
 }
