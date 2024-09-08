@@ -11,6 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  cached_network_image: ^3.4.1
+  shared_preferences: ^2.0.0
+  flutter_secure_storage: ^8.0.0
+    # easy way to add shimmer effect
   build_runner: ^2.4.12
   bloc: ^8.1.4
   flutter_bloc: ^8.1.4
