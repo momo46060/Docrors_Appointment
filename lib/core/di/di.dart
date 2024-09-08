@@ -17,6 +17,7 @@ Future<void> setUpGetIt() async {
   Dio dio = DioFactory.getDio();
   getIt.registerLazySingleton<HomeApi>(() => HomeApi(dio));
   getIt.registerLazySingleton<ApiService>(() => ApiService(dio));
+  getIt.registerLazySingleton<HomeApi>(() => HomeApi(dio));
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
   getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo(getIt()));
