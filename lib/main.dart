@@ -18,14 +18,11 @@ void main() async {
 }
 
 checkIsLogged() async {
-  String? token = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
-  print('******************************************************');
-  print(token);
-  print('******************************************************');
+  String? token =
+      await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   if (token == null || token == "") {
     isLoggedIn = false;
   } else {
     isLoggedIn = true;
   }
-  // isLoggedIn = token != null && token.isNotEmpty;
 }
