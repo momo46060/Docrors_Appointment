@@ -13,6 +13,11 @@ class DocApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('******************************************************');
+    print('******************************************************');
+    print('isLoggedIn : ${isLoggedIn.toString()}' );
+    print('******************************************************');
+    print('******************************************************');
     return ScreenUtilInit(
       designSize: Size(375, 812),
       minTextAdapt: true,
@@ -23,7 +28,7 @@ class DocApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.white
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute:isLoggedIn ? Routes.homeScreen : Routes.loginScreen,
+          initialRoute: isLoggedIn ? Routes.homeScreen : Routes.onBoarding,
       onGenerateRoute: appRouter.generateRoute,
     ),);
   }

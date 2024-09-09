@@ -33,7 +33,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<HomeCubit>()..emitHomeState(),
-                  child: HomeScreen(),
+                  child: const HomeScreen(),
                 ));
       default:
         return null;

@@ -11,14 +11,15 @@ bool isLoggedIn = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUpGetIt();
-  checkIsLogged();
+  await   checkIsLogged();
   runApp(DocApp(
     appRouter: AppRouter(),
   ));
 }
 
 checkIsLogged() async {
-  String? token = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+  String? token =
+      await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   print('******************************************************');
   print(token);
   print('******************************************************');
@@ -27,5 +28,6 @@ checkIsLogged() async {
   } else {
     isLoggedIn = true;
   }
-  // isLoggedIn = token != null && token.isNotEmpty;
+
+
 }

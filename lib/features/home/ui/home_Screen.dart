@@ -43,16 +43,35 @@ class HomeScreen extends StatelessWidget {
                       return Expanded(
                         child: Column(
                           children: [
-                             DoctorWithSpecialtyListView(list:specializionList,),
+                            DoctorWithSpecialtyListView(
+                              list: specializionList,
+                            ),
                             verticalSpace(8.0),
-                            DoctorSpecialtyListView(
-                            doctorsList: specializionList?.first!.doctorsList,
-                            )
+                            BlocBuilder<HomeCubit, HomeState>(
+                                buildWhen: (previous, current) =>
+                                    current is DoctorSuccess ||
+                                    current is DoctorError,
+                                builder: (context, state) {
+                                  return state.maybeWhen(
+                                      doctorsuccess: (data) {
+                                        return DoctorSpecialtyListView(
+                                          doctorsList:data,
+                                        );
+                                      },
+                                      doctorerror: (error) {
+                                        return Center(
+                                          child: Text(error),
+                                        );
+                                      },
+                                      orElse: () {
+                                        return const SizedBox.shrink();
+                                      });
+                                })
                           ],
                         ),
                       );
                     }, specializaionerror: (error) {
-                      return  Center(
+                      return Center(
                         child: Text(error),
                       );
                     }, orElse: () {
