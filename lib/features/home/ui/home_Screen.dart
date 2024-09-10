@@ -52,20 +52,17 @@ class HomeScreen extends StatelessWidget {
                                     current is DoctorSuccess ||
                                     current is DoctorError,
                                 builder: (context, state) {
-                                  return state.maybeWhen(
-                                      doctorsuccess: (data) {
-                                        return DoctorSpecialtyListView(
-                                          doctorsList:data,
-                                        );
-                                      },
-                                      doctorerror: (error) {
-                                        return Center(
-                                          child: Text(error),
-                                        );
-                                      },
-                                      orElse: () {
-                                        return const SizedBox.shrink();
-                                      });
+                                  return state.maybeWhen(doctorsuccess: (data) {
+                                    return DoctorSpecialtyListView(
+                                      doctorsList: data,
+                                    );
+                                  }, doctorerror: (error) {
+                                    return Center(
+                                      child: Text(error),
+                                    );
+                                  }, orElse: () {
+                                    return const SizedBox.shrink();
+                                  });
                                 })
                           ],
                         ),

@@ -11,9 +11,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../data/models/home_response_moodel.dart';
 
-class DoctorWithSpecialtyListView extends StatelessWidget {
+class DoctorWithSpecialtyListView extends StatefulWidget {
   final List<SpecializationsData?>? list;
+
   const DoctorWithSpecialtyListView({super.key, required this.list});
+
+  @override
+  State<DoctorWithSpecialtyListView> createState() =>
+      _DoctorWithSpecialtyListViewState();
+}
+
+class _DoctorWithSpecialtyListViewState
+    extends State<DoctorWithSpecialtyListView> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +31,44 @@ class DoctorWithSpecialtyListView extends StatelessWidget {
       height: 100.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: list!.length,
+        itemCount: widget.list!.length,
         itemBuilder: (context, index) {
-          var item = list![index];
+          var item = widget.list![index];
           return GestureDetector(
-            onTap: (){
+            onTap: () {
+              setState(() {
+                selectedIndex = index;
+              });
               context.read<HomeCubit>().emitFilterDoctorsList(index);
             },
             child: Padding(
               padding: EdgeInsetsDirectional.only(start: index == 0 ? 0 : 24.w),
               child: Column(
                 children: [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: ColorsManger.lightBlue,
-                    child: SvgPicture.asset(
-                      'assets/svgs/general_speciality.svg',
-                      height: 40.h,
-                      width: 40.w,
+                  Container(
+                    decoration:selectedIndex == index? BoxDecoration(
+                        shape: BoxShape.circle,
+                      border: Border.all(
+                        color: ColorsManger.mainBlue,
+                        width: 2.0
+                      )
+                    ) : null,
+                    child: CircleAvatar(
+                      radius: 28,
+                      backgroundColor: ColorsManger.lightBlue,
+                      child: SvgPicture.asset(
+                        'assets/svgs/general_speciality.svg',
+                        height: selectedIndex == index ? 42.h :40.h,
+                        width: selectedIndex == index ? 42.h :40.h,
+                      ),
                     ),
                   ),
                   verticalSpace(8),
                   Text(
                     item!.name!,
-                    style: TextStyles.font14DarkBlueMedium,
+                    style:selectedIndex == index ? TextStyles.font24blueBold.copyWith(
+                      fontSize: 16.sp
+                    ): TextStyles.font14DarkBlueMedium,
                   )
                 ],
               ),
